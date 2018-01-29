@@ -1,0 +1,49 @@
+#libary(car)
+x<-as.matrix(cars[,1])
+x
+y<-as.matrix(cars[,2])
+y
+m<-nrow(y)
+m
+thetanew0<-0
+thetanew0
+thetanew1<-1
+thetanew1
+result<-matrix(0,m,1)
+result
+result1<-matrix(0,m,1)
+result1
+for(j in 1:1000)
+{
+  for(i in 1:m)
+  {
+    result[i,1]<-((thetanew0+thetanew1*x[i,1])-y[i,1])
+  }
+  result
+  totalCost<-colSums(result)
+  totalCost
+  for(i in 1:m)
+  {
+    result1[i,1]<-((thetanew0+thetanew1*x[i,1])-y[i,1])*x[i,1]
+  }
+  result1
+  totalCost1<-colSums(result1)
+  totalCost1
+  alpha=0.001
+  thetanew0=thetanew0-(alpha/m)*totalCost
+  thetanew0
+  thetanew1=thetanew1-(alpha/m)*totalCost1
+  thetanew1
+  ct<-matrix(0,m,1)
+  for(i in 1:m)
+  {
+    ct[i,1]<-((thetanew0+thetanew1*x[i,1])-y[i,1])^2
+  }
+  ctnew<-colSums(ct)
+  newCost=(1/(2*m))*ctnew
+  costhistory<-matrix(0,1000,1)
+  costhistory[j] <- newCost
+}
+costhistory
+plot(1:1000,costhistory,type = 'l')
+
